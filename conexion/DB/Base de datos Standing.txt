@@ -1,0 +1,84 @@
+create database Standing;
+
+use Standing;
+
+create table TipoUsuario(
+codigoTUsuario int not null auto_increment,
+nombre varchar(25) not null,
+Primary Key (codigoTUsuario)
+);
+
+
+create table Usuarios(
+codigoUsuario int not null auto_increment,
+nombreCompleto varchar(70) not null,
+DUI varchar(9) null,
+NIT varchar(15) null,
+email varchar(50) not null,
+direccion varchar(50),
+fechaNacimiento date,
+tipoUsuario int not null,
+Primary Key (codigoUsuario),
+Foreign Key (tipoUsuario) References TipoUsuario(codigoTUsuario)
+);
+
+
+create table TipoProducto(
+codigoTProducto int not null auto_increment,
+nombre varchar(25) not null,
+Primary Key (codigoTProducto)
+);
+
+
+create table Productos(
+codigoProducto int auto_increment not null primary key,
+Nombre varchar(50) not null,
+tipoProducto int not null,
+descripcion varchar(500),
+imgpath varchar(70),
+Foreign key (tipoProducto) References TipoProducto(codigoTProducto)
+);
+
+
+create table EstadoCita(
+codigoEstado int auto_increment not null primary key,
+estado varchar(15) not null
+);
+
+
+create table Citas(
+codigoCita int auto_increment not null primary key,
+paciente int not null,
+admin int null,
+horario varchar(10),
+estado int,
+Foreign key (paciente) References Usuarios(codigoUsuario),
+Foreign key (admin) References Usuarios(codigoUsuario),
+Foreign key (estado) References EstadoCita(codigoEstado)
+);
+
+
+create table ProductoPorCita(
+codigoApartado int auto_increment not null primary key,
+cita int not null,
+producto int not null,
+Foreign Key (cita) References Citas(codigoCita),
+Foreign Key (producto) References Productos(codigoProducto)
+);
+
+
+create table FechaProductoListo(
+codigoHorario int primary key auto_increment,
+cita int not null,
+FechaEntrega date,
+Foreign Key (cita) References Citas(codigoCita)
+);
+
+
+create table Sugerencias(
+codigoSugerencia int auto_increment not null primary key,
+Motivo Varchar(100),
+Descripcion varchar(500),
+usuario int,
+Foreign key (usuario) References Usuarios(codigoUsuario)
+);
