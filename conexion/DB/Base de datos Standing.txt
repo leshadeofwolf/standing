@@ -1,8 +1,8 @@
-create database Standing;
+create database standing;
 
-use Standing;
+use standing;
 
-create table TipoUsuario(
+create table tipousuario(
 codigoTUsuario int not null auto_increment,
 nombre varchar(25) not null,
 Primary Key (codigoTUsuario)
@@ -11,11 +11,12 @@ Primary Key (codigoTUsuario)
 
 create table Usuarios(
 codigoUsuario int not null auto_increment,
-nombreCompleto varchar(70) not null,
+nombreCompleto varchar(150) not null,
 DUI varchar(9) null,
 NIT varchar(15) null,
-email varchar(50) not null,
+email varchar(150) not null,
 direccion varchar(50),
+password varchar(200) not null,
 fechaNacimiento date,
 tipoUsuario int not null,
 Primary Key (codigoUsuario),
@@ -50,7 +51,7 @@ create table Citas(
 codigoCita int auto_increment not null primary key,
 paciente int not null,
 admin int null,
-horario varchar(10),
+horario varchar(100),
 estado int,
 Foreign key (paciente) References Usuarios(codigoUsuario),
 Foreign key (admin) References Usuarios(codigoUsuario),

@@ -1,0 +1,9 @@
+insert into tipousuario (nombre) values ('Administrador');
+insert into tipousuario (nombre) values ('Empleado');
+insert into tipousuario (nombre) values ('Usuario');
+
+
+insert into usuarios (nombreCompleto,DUI,NIT,email,password,direccion,fechaNacimiento,TipoUsuario) values ('Manuel Orellana','000000','0000000','manuel@gmaill.com','EEE3CD57369ED84A57ECCF254EED89E12AAFCBCD114A2EC39381ADD52647BBCB','direccion','98-3-5',1);
+
+INSERT INTO `citas` (`codigoCita`, `paciente`, `admin`, `horario`, `estado`) VALUES
+(1, 1, 1, '11:15', 1);

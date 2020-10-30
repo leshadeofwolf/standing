@@ -1,3 +1,31 @@
+<?php
+include("conexion/conn.php");
+include('class/userclass.php');
+$userClass = new userClass();
+
+$errorMsgReg='';
+$errorMsgLogin='';
+/* Login Form */
+if (!empty($_POST['loginSubmit'])) 
+{
+$usernameEmail=$_POST['email'];
+$password=$_POST['password'];
+if(strlen(trim($usernameEmail))>1 && strlen(trim($password))>1 )
+{
+$uid=$userClass->userLogin($usernameEmail,$password);
+if($uid)
+{
+$url=BASE_URL.'conexion/prueba.php';
+header("Location: $url"); // Page redirecting to home.php 
+}
+else
+{
+$errorMsgLogin="Please check login details.";
+}
+}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -323,7 +351,7 @@
 					</li>
 
 					
-					</li>
+					
 
 					<li class="item-menu-mobile">
 						<a href="contact.html">Visitanos</a>
@@ -347,7 +375,7 @@
 
                 <!-- Registrate -->
 				<div class="col-md-6 p-b-30">
-					<form class="leave-comment">
+					<form class="leave-comment" method="post" name="resgistrar">
 						<h4 class="m-text26 p-b-36 p-t-15">
 							Registrate
 						</h4>
@@ -398,7 +426,7 @@
 				</div>
                     <!-- Iniciar Sesion -->
 				<div class="col-md-6 p-b-30">
-					<form class="leave-comment">
+					<form class="leave-comment" method="post" name="login">
 						<h4 class="m-text26 p-b-36 p-t-15">
 							Iniciar Sesion
 						</h4>
@@ -414,7 +442,7 @@
 						<div class="w-size25">
 							<!-- Button -->
 							<button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
-								Iniciar sesion
+								<input type="submit" class="button" name="loginSubmit" value="Iniciar Sesion">
 							</button>
 						</div>
 					</form>
